@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org" >
+<head>
+<meta charset="ISO-8859-1">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+<title>Welcome</title>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        h1 {
+            margin: 0;
+        }
+        .login-button-container {
+            text-align: center;
+        }
+
+        .login-button {
+            background-color: rgb(0, 0, 0);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .login-button:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer-button {
+            margin: 0 10px;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #555;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .footer-button:hover {
+            background-color: #777;
+        }
+        
+        p {
+            line-height: 1.5;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .highlight {
+            background-color: rgb(0, 128, 255);
+            padding: 5px;
+        }
+        
+        .center-text {
+            text-align: center;
+        }
+        
+        
+    </style>
+</head>
+<p>
+	
+	<header>
+        <h1>Welcome to Care Hospital</h1>
+    </header>
+	
+	<p>Our top-notch doctors, cutting-edge technology, and patient-first values </p> 
+	<p>have equipped us to create an institution that offers excellent treatment.</p>
+    <p>For all those who come to seeking wellness and good health.</p>
+    
+    <br><br>
+    <br><br>
+    
+    <div class="login-button-container">
+        <form  action = "#" th:action="@{/hospital/patientLoginForm}" method = "GET">
+        <button type="submit" class="login-button">Patient Login</button>
+        </form>
+    </div>
+    
+    <br><br>
+    <br><br>
+    
+    <div class="login-button-container">
+		<form  action = "#" th:action="@{/hospital/doctorLoginForm}" method = "GET">
+        <button type="submit" class="login-button">Doctor Login</button>
+        </form>
+    </div>
+    
+    <br><br>
+    
+    <div class="center-text">
+        <h3>New Patient?</h3>
+    </div>
+    
+    <div class="login-button-container">
+		
+		<form  action = "#" th:action="@{/hospital/registerNewPatientForm}" method = "POST">
+        <button type="submit" class="login-button">Register</button>
+        </form>
+    </div>
+    	     
+	<footer>
+        <a href="/aboutUs" class="footer-button">About Us</a>
+        <a href="/contact" class="footer-button">Contact</a>
+    </footer>
+
+</body>
+</html>

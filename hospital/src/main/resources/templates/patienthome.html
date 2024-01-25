@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+    	<meta charset="ISO-8859-1">
+    	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous">
+    	<title>Patient Homepage</title>
+	</head>
+	
+	<body class="bg-light">
+
+		<div class="container mt-5">
+	
+    		<h2 class="mb-4"> Welcome <span th:text="${session.loggedInPatient.firstName}"></span></h2>
+    
+    		<h3> Patient Details </h3> 
+    
+    			Name : <span th:text = "${session.loggedInPatient.firstName}"/>  <span th:text = "${session.loggedInPatient.lastName}"/>
+    			<br>
+    			Gender : <span th:text = "${session.loggedInPatient.gender}" />
+    			<br>
+    			Age : <span th:text = "${session.loggedInPatient.age}" />
+    			<br>
+    	
+    		<!-- Button to View Appointments -->
+    	
+   		 	<form action="#" th:action="@{/patient/showAppointments}" method="GET">
+				<br>
+        		<button type="submit" class="btn btn-info col-2">View Appointments</button>
+        		<!-- <input type = "hidden" name = "loggedInPatientId" th:value = "${session.loggedInPatient.patientId}" /> -->
+    		</form>
+    		
+    		<!-- Button to Book an Appointment -->
+    
+    		<form action="#" th:action="@{/patient/showDepartments}" method="GET">
+				<br>
+       		 	<button type="submit" class="btn btn-info col-2">Book An Appointment</button>
+    		</form>
+    
+    		<br><br>
+    
+    		<a th:href="@{/patient/logout}" class="btn btn-primary">Logout</a>
+    
+		</div>
+
+	</body>
+	
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Doctor Home Page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+	
+    <div class="container mt-5">
+        <h2 class="mb-4">Welcome <span th:text="${session.loggedInDoctor.firstName}"></span></h2>
+        
+        <form action="#" th:action="@{/doctor/showAppointments}" method="GET">
+            <button type="submit" class="btn btn-info col-2">Show Appointments</button>
+        
+        </form>
+        <br><br>
+        
+        <a th:href="@{/doctor/logout}" class="btn btn-primary">Logout</a>
+    </div>
+    
+</body>
+
+</html>

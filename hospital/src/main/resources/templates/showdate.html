@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous">
+    <title>Select Date</title>
+
+</head>
+
+<body>
+	
+	<!-- Displays selected department and doctor to Book an Appointment -->
+	
+    <div class="container mt-5">
+        
+        <h4 class="text-right text-success">Selected Department: <span th:text="${selectedDept}"></span></h4>
+        
+        <h4 class="text-right text-success">Selected Doctor: <span th:text="${doctorName}"></span></h4>
+        
+    </div>
+    
+    <br><br>
+
+    <div>
+        
+        <form th:action="@{/patient/bookAppointment}" method="post" onsubmit="return confirmBooking()">
+            
+            <label for="calendar">Select Date:</label>
+            
+            <input type="date" id="calendar" name="selectedDate" min="" required>
+            <input type="hidden" id="selectedDept" name="selectedDept" th:value="${selectedDept}" />
+            <input type="hidden" id="doctorName" name="doctorName" th:value="${doctorName}" />
+
+            <button type="submit">Book Appointment</button>
+            
+        </form>
+        
+        <br><br>
+        
+        <!-- Error message displayed if Doctor has 3 appointments on that day-->
+        
+        <div th:if="${docNA}" class="info-message text-danger">
+        	<span th:text="${docNA}"></span>
+    	</div>
+        
+    </div>
+
+    <script>
+        // Get tomorrow's date in the format YYYY-MM-DD
+        function getTomorrowDate() {
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const year = tomorrow.getFullYear();
+            const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
+            const day = String(tomorrow.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        // Set the minimum date for the calendar input to tomorrow
+        document.getElementById("calendar").setAttribute("min", getTomorrowDate());
+
+        // Function to show a confirmation pop-up
+        function confirmBooking() {
+            // Display confirmation dialog
+            const confirmed = window.confirm("Are you sure you want to book the appointment?");
+            
+            // If confirmed, return true to allow form submission
+            // If canceled, return false to prevent form submission
+            return confirmed;
+        }
+    </script>
+    
+    <br><br>
+    
+    <a th:href="@{/patient/logout}" class="btn btn-primary">Logout</a>
+    
+</body>
+
+</html>

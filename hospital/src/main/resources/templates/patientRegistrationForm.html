@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+	
+	<head>
+		<meta charset="ISO-8859-1">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+		<title>New Registration Form</title>
+	</head>
+	
+	<body>
+	
+	 	<div class="container">
+		 
+		<h3>New Patient Registration</h3>
+		<hr>
+	
+		<form action = "#" th:action = "@{/patient/register}" th:object="${patient}" method = "POST">
+		
+			First Name : 
+			<input type = "text" th:field = "*{firstName}" placeholder = "First Name">	
+			<span th:if="${#fields.hasErrors('firstName')}" class="error">
+   				 <span th:errors="*{firstName}" style="color: red;"></span>
+			</span>
+			<br><br>
+			
+			
+			Last Name :
+			<input type = "text" th:field = "*{lastName}" placeholder = "Last Name">
+			<span th:if="${#fields.hasErrors('lastName')}" class="error">
+   				 <span th:errors="*{lastName}" style="color: red;"></span>
+			</span>
+			<br><br>
+			
+			
+			Gender: 
+			<input type = "text" th:field = "*{gender}" placeholder = "Gender"> F/M/O
+			<span th:if="${#fields.hasErrors('gender')}" class="error">
+   				 <span th:errors="*{gender}" style="color: red;"></span>
+			</span>
+			<br><br>
+			
+			
+			Age : 
+			<input type = "text" th:field = "*{age}" placeholder = "Age">
+			<span th:if="${#fields.hasErrors('age')}" class="error">
+   				 <span th:errors="*{age}" style="color: red;"></span>
+			</span>
+			<br><br>
+			
+			
+			Email-Id:
+			<input type = "email" th:field = "*{email}" placeholder = "Email-Id" required>
+			<br><br>
+			
+			
+			Password : 
+			<input type = "password" th:field = "*{password}" placeholder = "Password">
+			<span th:if="${#fields.hasErrors('password')}" class="error">
+   				 <span th:errors="*{password}" style="color: red;"></span>
+			</span>
+			<br><br>
+			
+			
+			<button type="submit" class="btn btn-info col-2">Save</button>
+			
+		
+			<p th:if = "${emailexists}" th:text = "${emailexists}"></p>
+		
+		</form>
+	
+		<br><br>
+	
+		<form action = "#" th:action = "@{/hospital/patientLoginForm}" method = "GET">
+			<button type="submit" class="btn btn-info col-2">Return to Login</button>
+		</form>
+	
+	</div>
+
+</body>
+</html>

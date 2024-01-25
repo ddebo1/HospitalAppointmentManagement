@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		
+    	<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<title>Bill</title>
+    	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous">
+          
+    	<style>
+        .custom-thanks {
+            font-size: 18px;
+            color: #2c3e50; /* Dark gray color */
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9e5e5; /* Light pink background color */
+            border-radius: 5px;
+        }
+   		 </style>
+   		 
+	</head>
+	
+	<body>
+		
+		<!-- Error message to display if bill is NA -->
+		
+    	<div class="container mt-5" th:if="${bill == null}">
+        	<p class="alert alert-info">Prescription Not yet added. Please visit after sometime.</p>
+    	</div>
+    	
+    	<!-- Display Bill Details -->
+    	
+    	<div class="container mt-5" th:if="${bill != null and bill.billItems != null}">
+			
+        	<h3>Bill Id: <span th:text="${bill.billId}"></span></h3>
+        	
+        	<hr>
+        	
+        	<div class="row">
+				
+				<!-- Display Patient details -->
+            
+            	<div class="col-md-6">
+                	<h5>Patient Details:</h5>
+                	<div>
+                   		Name: <span th:text="${billPatient.firstName + ' ' + billPatient.lastName}"></span><br>
+                    	Gender: <span th:text="${billPatient.gender}"></span><br>
+                    	Age: <span th:text="${billPatient.age}"></span>
+                	</div>
+           	 	</div>
+           	 	
+           	 	<!-- Display Doctor details -->
+           	 	
+            	<div class="col-md-6">
+                	<h5>Doctor Details:</h5>
+                	<div>
+                    	Name: <span th:text="${billDoc.firstName + ' ' + billDoc.lastName}"></span><br>
+                    	Department: <span th:text="${billDoc.department.departmentName}"></span>
+                	</div>
+            	</div>
+       	 </div>
+       	 
+        <br>
+        
+        <h5>Appointment Status:</h5>
+        
+        <span th:text="${billAppt.status}"></span>
+        
+        <br><br>
+        
+        <table class="table table-striped">
+            
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Price per Item</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <tr th:each="billitem, index : ${billableItems}">
+                    <td th:text="${index.index + 1}"></td>
+                    <td th:text="${billitem.item.itemName}"></td>
+                    <td th:text="${billitem.quantity}"></td>
+                    <td th:text="${billitem.item.price}"></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h5>Total: </h5> <span th:text="${bill.total}"></span>
+        
+        <br><br>
+        
+        Please pay the bill in the pharmacy and collect your medicines. 
+        
+        <p class="custom-thanks">Thanks for trusting Care Hospitals!</p>
+    
+    </div>
+
+	</body>
+	
+</html>

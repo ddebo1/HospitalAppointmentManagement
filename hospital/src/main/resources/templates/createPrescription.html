@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	
+    <meta charset="UTF-8">
+    <title>Prescription</title>
+    <!-- Bootstrap CSS Link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+    <div class="container mt-5">
+
+        <h2 class="text-center">Prescription</h2>
+
+        <form action="/doctor/addItem" method="POST" class="w-50 mx-auto">
+			
+			<input type="hidden" id="billId" name="billId" th:value="${billId}" />
+			
+			<!-- Shows list of item Names -->
+
+            <div class="form-group">
+				
+                <label for="item" class="form-label select-label">Select Item:</label>
+   				 <br><br>
+    			<select class="form-control w-50 mx-auto" id="item" name="itemName">
+        			<option th:each="item : ${allItems}" th:value="${item.itemName}" th:text="${item.itemName}"></option>
+    			</select>
+    			
+            </div>
+            
+            <!-- Showsquantity from 1 to 10 -->
+
+            <div class="form-group">
+                <label for="quantity">Select Quantity:</label>
+                <select class="form-control" id="quantity" name="quantity">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add</button>
+
+        </form>
+        
+     
+     <!-- To display added items -->
+     
+    <h4>Added Items:</h4>
+    
+    <ul>
+        <li th:each="item : ${addedItems}" th:text="${item.item.itemName + ' -  ' + item.quantity}"></li>
+    </ul>
+    
+    <form action="/doctor/savePrescription" method="GET">
+ 
+    	<button type="submit" class="btn btn-primary">Save Prescription</button>
+    	<br>
+        
+	</form>
+
+</body>
+</html>

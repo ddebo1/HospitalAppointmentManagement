@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Show Doctors</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous">
+
+</head>
+
+<body>
+    
+    <div class="container mt-5">
+        <h4 class="text-right text-success">Selected Department: <span th:text="${selectedDept}"></span></h4>
+    </div>
+
+    <div class="container mt-5">
+        
+        <h4 class="text-left">Available Doctors</h4>
+
+       
+        <table class="table">
+           
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Book</th>
+                </tr>
+            
+            </thead>
+            
+            <tbody>
+               
+                <tr th:each="doctor : ${doctors}">
+                   
+                    <td>
+						<span th:text = "${doctor.firstName}"/> <span th:text = "${doctor.lastName}"/>
+					</td>
+
+                    <td>
+                    	<a th:href="@{/patient/showDate(doctorId=${doctor.doctorId}, selectedDept = ${selectedDept})}"
+					   	class="btn btn-info btn-sm">
+							Select Date
+						</a>
+					</td>
+					
+                </tr>
+                
+            </tbody>
+            
+        </table>
+            
+    </div>
+    
+    <br><br>
+    
+    <a th:href="@{/patient/logout}" class="btn btn-primary">Logout</a>
+
+</body>
+</html>
